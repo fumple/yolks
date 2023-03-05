@@ -1,8 +1,10 @@
 FROM        --platform=$TARGETOS/$TARGETARCH debian:stable-slim
 
+STOPSIGNAL SIGINT
+
 LABEL       author="David Wolfe (Red-Thirten)" maintainer="rehlmgaming@gmail.com"
 
-LABEL       org.opencontainers.image.source="https://github.com/parkervcp/yolks"
+LABEL       org.opencontainers.image.source="https://github.com/fumple/yolks"
 LABEL       org.opencontainers.image.licenses=MIT
 
 ## Update base packages and install dependencies
