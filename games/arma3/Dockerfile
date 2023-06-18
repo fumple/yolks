@@ -1,4 +1,4 @@
-FROM        --platform=$TARGETOS/$TARGETARCH debian:bullseye-slim
+FROM        --platform=$TARGETOS/$TARGETARCH cm2network/steamcmd:root
 
 STOPSIGNAL SIGINT
 
@@ -19,7 +19,7 @@ RUN         dpkg --add-architecture i386 \
                 iproute2 \
                 gettext-base \
                 ca-certificates \
-                numactl \
+#                numactl \
                 libssl-dev \
                 lib32gcc-s1 \
                 libsdl2-2.0-0 \
@@ -44,9 +44,10 @@ RUN         touch ${NSS_WRAPPER_PASSWD} ${NSS_WRAPPER_GROUP} \
 ADD         passwd.template /passwd.template
 
 ## Setup user and working directory
-RUN         useradd -m -d /home/container -s /bin/bash container
-USER        container
-ENV         USER=container HOME=/home/container
+#RUN         useradd -m -d /home/container -s /bin/bash container
+RUN         ln -s /home/steam /home/container
+USER        steam
+ENV         USER=steam HOME=/home/container
 WORKDIR     /home/container
 
 ## Copy over and execute entrypoint.sh
